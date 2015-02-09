@@ -39,7 +39,7 @@
 
 %{{{ --- Packages ---------------------
 
-\RequirePackage[no-math]{fontspec}
+%\RequirePackage{fontspec}
 \RequirePackage{etoolbox}
 \RequirePackage{tikz}
 \RequirePackage{pgfplots}
@@ -62,7 +62,7 @@
     \vfill
     \ifx\inserttitle\@empty%
     \else%
-    {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeLowercase{\inserttitle}\par}%
+    {\raggedright\linespread{1.0}\usebeamerfont{title}\usebeamercolor[fg]{title}\scshape\MakeUppercase{\inserttitle}\par}%
     \vspace*{0.5em}
     \fi%
     \ifx\insertsubtitle\@empty%
@@ -156,7 +156,7 @@
 
 \newcommand{\insertsectionHEAD}{%
   \expandafter\insertsectionHEADaux\insertsectionhead}
-  \newcommand{\insertsectionHEADaux}[3]{\textsc{\MakeLowercase{#3}}
+  \newcommand{\insertsectionHEADaux}[3]{\textsc{\MakeUppercase{#3}}
 }
 
 \newcommand{\plain}[2][]{%
@@ -178,11 +178,8 @@
 \setlength{\leftmarginii}{1em}
 \setlength{\leftmarginiii}{1em}
 
-\newcommand{\itemBullet}{∙}
-
-\setbeamertemplate{itemize item}{\itemBullet}
-\setbeamertemplate{itemize subitem}{\itemBullet}
-\setbeamertemplate{itemize subsubitem}{\itemBullet}
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
 \setlength{\parskip}{0.5em}
 
 %}}}
@@ -231,9 +228,9 @@
 \nointerlineskip
 \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.5ex,dp=1.5ex]{frametitle}
 \if@protectFrameTitle
-  \usebeamerfont{frametitle}\MakeLowercase{\protect\insertframetitle}%
+  \usebeamerfont{frametitle}\MakeUppercase{\protect\insertframetitle}%
 \else
-  \usebeamerfont{frametitle}\MakeLowercase{\insertframetitle}%
+  \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
 \fi
 \end{beamercolorbox}%
 \if@useTitleProgressBar
