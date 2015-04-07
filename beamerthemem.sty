@@ -59,6 +59,20 @@
 \setbeamertemplate{title page}
 {
   \begin{minipage}[b][\paperheight]{\textwidth}
+    \vspace*{\@mtheme@voffset}
+    \ifx\inserttitlegraphic\@empty%
+    \else%
+    {
+    	% actual output of titlegraphic
+   	    \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par%
+    	% measurement and add negative vspace
+		\newdimen\logoheight
+		\setbox0=\vbox{\inserttitlegraphic}%
+		\logoheight=\ht0 \advance\logoheight by \dp0 %
+		\vspace*{-\logoheight}%
+		\vspace*{-1em}% I don't know why this additional negative space is needed
+    }%
+    \fi%
     \vfill
     \ifx\inserttitle\@empty%
     \else%
@@ -87,7 +101,7 @@
     {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
     \fi%
     \vfill
-    \vspace*{5mm}
+    \vspace*{\@mtheme@voffset}
   \end{minipage}
 }
 
@@ -117,16 +131,19 @@
     \divide\progressbar@tmpdim by \progressbar@tmpcountb
     \multiply\progressbar@tmpdim by 100
 
+    % fixes very high linespacing introduced via \textsc{\MakeLowercase{...}}
+    \fontsize{1em}{1em}\selectfont
+
     \makebox[\textwidth][c]{
       \begin{tikzpicture}[tight background]
 
-        \node[anchor=west, fg, inner sep=0pt] at (0pt, 0pt) {\insertsectionHEAD};
+        \node[anchor=south west, fg, inner sep=0pt, text width=\progressbar@pbwd] at (0pt, 0pt) {\insertsectionHEAD};
 
         \draw[anchor=west, fg!20, fill=fg!20, inner sep=0pt]
-        (2pt, -16pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+        (0, -1ex) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
 
         \draw[anchor=west, fg, fill=fg, inner sep=0pt]
-        (2pt, -16pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+        (0, -1ex) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
       \end{tikzpicture}%
     }
   } % end usebeamercolor{palette primary}
@@ -175,6 +192,7 @@
 \setlength{\leftmargini}{1em}
 
 % Actually one level should be enough but ...
+% One level is surely not enough!
 \setlength{\leftmarginii}{1em}
 \setlength{\leftmarginiii}{1em}
 
@@ -201,7 +219,6 @@
 
 %}}}
 %{{{ --- Captions ---------------------
-
 \setbeamertemplate{caption label separator}{. }
 
 %}}}
@@ -230,9 +247,9 @@
 \nointerlineskip
 \begin{beamercolorbox}[wd=\paperwidth,leftskip=0.3cm,rightskip=0.3cm,ht=2.5ex,dp=1.5ex]{frametitle}
 \if@protectFrameTitle
-  \usebeamerfont{frametitle}\MakeUppercase{\protect\insertframetitle}%
+  \usebeamerfont{frametitle}\protect\insertframetitle%
 \else
-  \usebeamerfont{frametitle}\MakeUppercase{\insertframetitle}%
+  \usebeamerfont{frametitle}\insertframetitle%
 \fi
 \end{beamercolorbox}%
 \if@useTitleProgressBar
