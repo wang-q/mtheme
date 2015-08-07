@@ -19,6 +19,7 @@ $(PDF): beamerthemem.sty $(AUX) $(SRC)
 clean:
 	@rm -f $(PDF)
 	@git clean -xf
+	@rm -fr _minted-demo/
 
 install:
 	mkdir -p $(INSTALL_DIR)
