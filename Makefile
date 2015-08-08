@@ -1,20 +1,20 @@
 SRC = demo.tex
 PDF = demo.pdf
 AUX = demo.aux
-TEXC := xelatex
-TEXC_OPTS += -shell-escape
 TEXMFHOME = $(shell kpsewhich -var-value=TEXMFHOME)
 INSTALL_DIR = $(TEXMFHOME)/tex/latex/mtheme
+
+TEXC := latexmk -xelatex 
 
 .PHONY: clean install
 
 all: $(PDF)
 
 $(AUX):
-	$(TEXC) $(TEXC_OPTS) $(SRC)
+	$(TEXC) $(SRC)
 
 $(PDF): beamerthemem.sty $(AUX) $(SRC)
-	$(TEXC) $(TEXC_OPTS) $(SRC)
+	$(TEXC) $(SRC)
 
 clean:
 	@rm -f $(PDF)

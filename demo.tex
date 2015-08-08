@@ -1,95 +1,92 @@
-\documentclass[10pt, compress]{beamer}
+\documentclass[10pt]{beamer}
 
 \usetheme{m}
 
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
-\usepackage{minted}
 
+\usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
 
-\usemintedstyle{trac}
-
-\title{A modern beamer theme}
-\subtitle{}
+\title{Metropolis}
+\subtitle{A modern beamer theme}
 \date{\today}
 \author{Matthias Vogelgesang}
 \institute{Institute or miscellaneous information}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
 
 \begin{document}
 
 \maketitle
 
+\begin{frame}
+  \frametitle{Table of Contents}
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}
+
 \begin{frame}[fragile]
   \frametitle{mtheme}
 
-  The \emph{mtheme} is a Beamer theme with minimal visual noise inspired by the
-  \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
+  The \textsc{Metropolis} theme is a Beamer theme with minimal visual noise
+  inspired by the \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
   Theme} by Benjamin Weiss.
 
   Enable the theme by loading
 
-  \begin{minted}[fontsize=\small]{latex}
-    \documentclass{beamer}
-    \usetheme{m}
-  \end{minted}
+  \begin{verbatim}    \documentclass{beamer}
+    \usetheme{m}\end{verbatim}
 
   Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX
   installed to enjoy this wonderful typography.
 \end{frame}
-
 \begin{frame}[fragile]
   \frametitle{Sections}
   Sections group slides of the same topic
 
-  \begin{minted}[fontsize=\small]{latex}
-    \section{Elements}
-  \end{minted}
+  \begin{verbatim}    \section{Elements}\end{verbatim}
 
-  for which the \emph{mtheme} provides a nice progress indicator \ldots
+  for which \textsc{Metropolis} provides a nice progress indicator \ldots
 \end{frame}
 
 \section{Elements}
 
 \begin{frame}[fragile]
   \frametitle{Typography}
-      \begin{minted}[fontsize=\small]{latex}
-The theme provides sensible defaults to \emph{emphasize}
-text, \alert{accent} parts or show \textbf{bold} results.
-      \end{minted}
+      \begin{verbatim}The theme provides sensible defaults to
+\emph{emphasize} text, \alert{accent} parts
+or show \textbf{bold} results.\end{verbatim}
 
   \begin{center}becomes\end{center}
 
   The theme provides sensible defaults to \emph{emphasize} text,
   \alert{accent} parts or show \textbf{bold} results.
 \end{frame}
+
 \begin{frame}{Lists}
-  \begin{columns}[onlytextwidth]
-    \column{0.5\textwidth}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.33\textwidth}
       Items
       \begin{itemize}
-        \item Milk 
-        \begin{itemize}
-        	\item Full fat
-			\item Lite 
-        \end{itemize}
-        \item Eggs 
-        \item Potatos
+        \item Milk \item Eggs \item Potatos
       \end{itemize}
 
-    \column{0.5\textwidth}
+    \column{0.33\textwidth}
       Enumerations
       \begin{enumerate}
         \item First, \item Second and \item Last.
       \end{enumerate}
+
+    \column{0.33\textwidth}
+      Descriptions
+      \begin{description}
+        \item[PowerPoint] Meeh. \item[Beamer] Yeeeha.
+      \end{description}
   \end{columns}
 \end{frame}
-\begin{frame}{Descriptions}
-  \begin{description}
-    \item[PowerPoint] Meeh.
-    \item[Beamer] Yeeeha.
-  \end{description}
-\end{frame}
+
 \begin{frame}{Animation}
   \begin{itemize}[<+- | alert@+>]
     \item \alert<4>{This is\only<4>{ really} important}
@@ -97,12 +94,13 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \item And now this
   \end{itemize}
 \end{frame}
+
 \begin{frame}{Figures}
   \begin{figure}
     \newcounter{density}
     \setcounter{density}{20}
     \begin{tikzpicture}
-      \def\couleur{mLightBrown}
+      \def\couleur{alerted text.fg}
       \path[coordinate] (0,0)  coordinate(A)
                   ++( 90:5cm) coordinate(B)
                   ++(0:5cm) coordinate(C)
@@ -123,6 +121,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \href{http://www.texample.net/tikz/examples/rotated-polygons/}{texample.net}.}
   \end{figure}
 \end{frame}
+
 \begin{frame}{Tables}
   \begin{table}
     \caption{Largest cities in the world (source: Wikipedia)}
@@ -138,18 +137,48 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \end{tabular}
   \end{table}
 \end{frame}
+
 \begin{frame}{Blocks}
+  Three different block environments are pre-defined and may be styled with an
+  optional background color.
 
-  \begin{block}{This is a block title}
-    This is soothing.
-  \end{block}
+  \begin{columns}[T,onlytextwidth]
+    \column{0.5\textwidth}
+      \begin{block}{Default}
+        Block content.
+      \end{block}
 
+      \begin{alertblock}{Altert}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Example}
+        Block content.
+      \end{exampleblock}
+
+    \column{0.5\textwidth}
+
+      \begin{block}{Default}
+        Block content.
+      \end{block}
+
+      \begin{alertblock}{Altert}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Example}
+        Block content.
+      \end{exampleblock}
+
+  \end{columns}
 \end{frame}
+
 \begin{frame}{Math}
   \begin{equation*}
     e = \lim_{n\to \infty} \left(1 + \frac{1}{n}\right)^n
   \end{equation*}
 \end{frame}
+
 \begin{frame}{Line plots}
   \begin{figure}
     \begin{tikzpicture}
@@ -166,6 +195,7 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \end{tikzpicture}
   \end{figure}
 \end{frame}
+
 \begin{frame}{Bar charts}
   \begin{figure}
     \begin{tikzpicture}
@@ -187,12 +217,16 @@ text, \alert{accent} parts or show \textbf{bold} results.
     \end{tikzpicture}
   \end{figure}
 \end{frame}
+
 \begin{frame}{Quotes}
   \begin{quote}
     Veni, Vidi, Vici
   \end{quote}
 \end{frame}
 
+\begin{frame}{References}
+  Some references to showcase [allowframebreaks] \cite{knuth92,ConcreteMath,Simpson,Er01,greenwade93}
+\end{frame}
 
 \section{Conclusion}
 
@@ -211,5 +245,14 @@ text, \alert{accent} parts or show \textbf{bold} results.
 \end{frame}
 
 \plain{Questions?}
+
+\begin{frame}[allowframebreaks]
+
+  \frametitle{References}
+
+  \bibliography{demo}
+  \bibliographystyle{abbrv}
+
+\end{frame}
 
 \end{document}
