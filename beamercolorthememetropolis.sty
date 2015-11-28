@@ -13,10 +13,6 @@
 %}}}
 %{{{ --- Options ----------------------
 
-\newif\if@beamer@metropolis@blockbg
-\@beamer@metropolis@blockbgfalse
-\DeclareOptionBeamer{blockbg}{\@beamer@metropolis@blockbgtrue}
-
 \DeclareOptionBeamer*{%
   \PackageWarning{beamercolorthememetropolis}{Unknown option `\CurrentOption'}%
 }
@@ -30,43 +26,62 @@
 
 \definecolor{mDarkBrown}{HTML}{604c38}
 \definecolor{mDarkTeal}{HTML}{23373b}
-
 \definecolor{mLightBrown}{HTML}{EB811B}
 \definecolor{mMediumBrown}{HTML}{C87A2F}
+\definecolor{mLightGreen}{HTML}{14B03D}
 
 \setbeamercolor{palette primary}{fg=mDarkTeal, bg=black!2}
 \setbeamercolor{palette secondary}{fg=white, bg=mDarkTeal}
 \setbeamercolor{palette quaternary}{fg=mDarkBrown}
-\setbeamercolor{palette tertiary}{fg=white, bg=mMediumBrown}
+
+\setbeamercolor{normal text}{%
+    fg=mDarkTeal,
+    bg=black!2
+}
+\setbeamercolor{alerted text}{%
+  fg=mLightBrown
+}
+\setbeamercolor{example text}{%
+  fg=mLightGreen
+}
 
 \setbeamercolor{title}{parent=palette primary}
 \setbeamercolor{subtitle}{parent=palette primary}
-\setbeamercolor{author}{parent=palette primary}
-\setbeamercolor{date}{parent=palette primary}
-\setbeamercolor{institute}{parent=palette primary}
+\setbeamercolor{author}{use=normal text, parent=normal text}
+\setbeamercolor{date}{use=normal text, parent=normal text}
+\setbeamercolor{institute}{use=normal text, parent=normal text}
 
 \setbeamercolor{section title}{parent=palette primary}
 \setbeamercolor{frametitle}{parent=palette secondary}
 \setbeamercolor{background canvas}{parent=palette primary}
-\setbeamercolor{structure}{fg=mDarkTeal}
+\setbeamercolor{structure}{use=normal text, fg=normal text.fg}
 
-\setbeamercolor{normal text}{fg=black!97}
-\setbeamercolor{alerted text}{fg=mLightBrown}
-
-\setbeamercolor{footnote}{fg=mDarkTeal!50}
-\setbeamercolor{footnote mark}{fg=.}
 \setbeamercolor{page number in head/foot}{fg=mDarkTeal}
 
-\if@beamer@metropolis@blockbg
+\setbeamercolor{block title}{%
+    use=normal text,
+    fg=normal text.fg,
+    bg=normal text.bg!80!fg
+}
+\setbeamercolor{block title alerted}{%
+    use={block title, alerted text},
+    bg=block title.bg,
+    fg=alerted text.fg
+}
+\setbeamercolor{block title example}{%
+    use={block title, example text},
+    bg=block title.bg,
+    fg=example text.fg
+}
 
-\setbeamercolor{block title}{parent=palette primary,bg=palette primary.bg!80!fg}
-\setbeamercolor{block title alerted}{use=alerted text,parent=palette primary,fg=alerted text.fg}
-\setbeamercolor{block title example}{use=example text,parent=palette primary,fg=example text.fg}
+\setbeamercolor{block body alerted}{use=block body, parent=block body}
+\setbeamercolor{block body example}{use=block body, parent=block body}
+\setbeamercolor{block body}{
+  use={block title, normal text},
+  bg=block title.bg!50!normal text.bg
+}
 
-\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg}
-\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg}
-\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg}
-
-\fi
+\setbeamercolor{footnote}{fg=normal text.fg!90}
+\setbeamercolor{footnote mark}{fg=.}
 
 \mode<all>
